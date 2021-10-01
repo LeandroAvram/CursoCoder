@@ -1,0 +1,20 @@
+[
+  {
+    "title": "esteobjetosemodifico",
+    "price": 70,
+    "thumbnail": "eeeeeeeeee",
+    "id": 1
+  },
+  {
+    "title": "esteobjetosemodifico",
+    "price": 70,
+    "thumbnail": "eeeeeeeeee",
+    "id": 2
+  },
+  {
+    "title": "hpña hohla",
+    "price": 5.68,
+    "thumbnail": "Asdasdsaadsasdadasadasd",
+    "id": 5
+  }
+]
