@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
+    link(rel='stylesheet', href='../stylesheets/style.css')
+  body 
+    -var div1 = ['container', 'mt-3']
+    div(class=div1)
+        -var div2 = ['jumbotron']
+        div(class=div2)
+            h1(style={color:'crimson'})="Historial"
+            if dataexits
+                  div(class="table-responsive")
+                        table(class="table table-dark")
+                            tr(style="color: yellow;")
+                                th title
+                                th price
+                                th URL
+                            each arra in array
+                                tr
+                                    td= arra.title
+                                    td= arra.price
+                                    td 
+                                        img(src=arra.thumbnail, width="85", height="100")
+            else 
+                h3(class="alert alert-danger") no se encontraron datos
+            a(class="btn btn-info mt-3 mb-5" href="/") Form
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
