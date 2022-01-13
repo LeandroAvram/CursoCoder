@@ -14,8 +14,6 @@ const productContainer = new contenedorSQL(
       title: 'string',
       price: 'float',
       thumbnail: 'string',
-      description: 'string',
-      ranking: 'integer',
       id: 'primary'
     }
   } 
