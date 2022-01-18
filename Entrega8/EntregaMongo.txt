@@ -1,0 +1,91 @@
+
+1 y 2) 
+db.productos.insertMany([
+{title: 'Leche', price: 150, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Chocolate', price: 369, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Harina', price: 800, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Lenteja', price: 1300, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Cebolla', price: 900, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Monitor', price: 4300, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Plancha', price: 2500, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'Heladera', price: 3700, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+{title: 'TV', price: 4999, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},    
+{title: 'Perfume', price: 3600, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+])
+
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("61e63728653e5dafddb7d01d"),
+    '1': ObjectId("61e63728653e5dafddb7d01e"),
+    '2': ObjectId("61e63728653e5dafddb7d01f"),
+    '3': ObjectId("61e63728653e5dafddb7d020"),
+    '4': ObjectId("61e63728653e5dafddb7d021"),
+    '5': ObjectId("61e63728653e5dafddb7d022"),
+    '6': ObjectId("61e63728653e5dafddb7d023"),
+    '7': ObjectId("61e63728653e5dafddb7d024"),
+    '8': ObjectId("61e63728653e5dafddb7d025"),
+    '9': ObjectId("61e63728653e5dafddb7d026")
+  }
+}
+
+db.mensajes.insertMany([
+{mail: "test1@test.com",mensaje: "Hola",fecha: new Date},
+{mail: "test2@test.com",mensaje: "hola",fecha: new Date},
+{mail: "test1@test.com",mensaje: "como estas?",fecha: new Date},
+{mail: "test2@test.com",mensaje: "bien y vos?",fecha: new Date},
+{mail: "test1@test.com",mensaje: "bien",fecha: new Date},
+{mail: "test2@test.com",mensaje: "que bueno",fecha: new Date},
+{mail: "test1@test.com",mensaje: "ya nose que mas poner",fecha: new Date},
+{mail: "test2@test.com",mensaje: "yo tampoco",fecha: new Date},
+{mail: "test2@test.com",mensaje: "jajajaja",fecha: new Date},
+{mail: "test1@test.com",mensaje: "kjajajajja",fecha: new Date},
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("61e63827653e5dafddb7d027"),
+    '1': ObjectId("61e63827653e5dafddb7d028"),
+    '2': ObjectId("61e63827653e5dafddb7d029"),
+    '3': ObjectId("61e63827653e5dafddb7d02a"),
+    '4': ObjectId("61e63827653e5dafddb7d02b"),
+    '5': ObjectId("61e63827653e5dafddb7d02c"),
+    '6': ObjectId("61e63827653e5dafddb7d02d"),
+    '7': ObjectId("61e63827653e5dafddb7d02e"),
+    '8': ObjectId("61e63827653e5dafddb7d02f"),
+    '9': ObjectId("61e63827653e5dafddb7d030")
+  }
+}
+
+3)
+db.mensajes.find()
+db.productos.find()
+
+4)
+db.productos.countDocuments()
+db.mensajes.countDocuments()
+
+5)
+a)
+db.productos.insertOne({title: 'Auto', price: 4900, thumbail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/graduation-square-academic-cap-school-128.png'},
+)
+
+b)
+db.productos.find({title: "Auto"})
+db.productos.find({price: {$lt:1000}})
+db.productos.find({$and:[{price:{$gte:1000}},{price:{$lte:3000}}]})
+db.productos.find({price: {$gt:3000}})
+db.productos.find().sort({price: 1}).skip(2).limit(1)
+c)
+db.productos.updateMany({},{$set:{"Stock":100}})
+d)
+db.productos.updateMany({price:{$gte:4000}},{$set:{"Stock":0}})
+e)
+db.productos.deleteMany({price:{$lt:1000}})
+
+6)
+db.createUser({user: "pepe",pwd: "asd456",roles: [{ role: "read", db: "ecommerce" }]})
+
+
+
+
