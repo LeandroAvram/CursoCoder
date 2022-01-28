@@ -1,0 +1,39 @@
+[
+  {
+    "timestamp": 1635293014614,
+    "productos": [
+      {
+        "timestamp": "2021-10-26T23:35:23.081Z",
+        "nombre": "chocolatada",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "4da68994awe",
+        "foto": "www.asdad.asdadsa",
+        "precio": "689",
+        "stock": "6",
+        "id": 1
+      }
+    ],
+    "id": 1
+  },
+  {
+    "timestamp": 1635293021690,
+    "productos": [],
+    "id": 2
+  },
+  {
+    "timestamp": 1635294797693,
+    "productos": [
+      {
+        "timestamp": "2021-10-26T23:35:23.081Z",
+        "nombre": "adadas",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "4da68994awe",
+        "foto": "www.asdad.asdadsa",
+        "precio": "689",
+        "stock": "6",
+        "id": 1
+      }
+    ],
+    "id": 4
+  }
+]
