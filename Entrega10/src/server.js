@@ -1,11 +1,18 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const session = require('express-session')
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
 const faker = require('faker')
 const normalizeChat = require('./util/normalizeObject')
 const util = require('util')
 
+/* ------------------------------------------------*/
+/*           Persistencia por MongoDB              */
+/* ------------------------------------------------*/
+const MongoStore = require('connect-mongo')
+const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
+/* ------------------------------------------------*/
 
 const ProductTest = ['chocolate','leche','mani','manzana','sandia','pilas','aceite','ruedas']
 const price = ['50','68','12','5','90','64','77','23']
@@ -31,6 +38,23 @@ const productContainer = new contenedorSQL(
 const chatContainer = new ContenedorArchivo('src/resource/chats.txt')
 
 const app = express()
+
+app.use(session({
+  store: MongoStore.create({
+      //En Atlas connect App :  Make sure to change the node version to 2.2.12:
+      mongoUrl: '*********************************',
+      mongoOptions: advancedOptions
+  }),
+  /* ----------------------------------------------------- */
+
+  secret: 'secreto312415323',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      maxAge: 60000
+  } 
+}))
+
 app.use(express.json())
 app.use('/', express.static('public'))
 app.use(express.urlencoded({ extended: true }))
@@ -76,7 +100,12 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-    res.render('main',{})
+  if(req.session.name){
+    let dataname = req.session.name
+    res.render('main',{dataname})
+  }else{
+    res.redirect('/login')
+  }
 })
 
 app.get('/login', (req, res) => {
@@ -85,6 +114,23 @@ app.get('/login', (req, res) => {
 
 app.get('/test', (req, res) => {
   res.render('main-test',{})
+})
+
+app.get('/loginsend',(req, res) => {
+  req.session.name = req.query.name
+  console.log(req.query.name)
+  console.log(req.session.name)
+  res.redirect('/')
+})
+
+app.get('/logout',(req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      res.json({ error: 'olvidar', body: err })
+    } else {
+      res.send('usuario deslogeado')
+    }
+  })
 })
 
 app.get('/product', async (req, res) => {

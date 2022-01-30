@@ -39,8 +39,15 @@ function agregarProducto(form) {
 function login(form) {
     const name = form["name"].value
     console.log(name)
+    fetch(`/loginsend?name=${name}`)
     form.reset();
+    window.location.href = 'http://localhost:8080';
     return false;
+}
+
+function logout(){
+    fetch(`/logout`)
+    window.location.href = 'http://localhost:8080/login';
 }
 
 //*********************test */
