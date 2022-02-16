@@ -1,4 +1,5 @@
 const express = require('express')
+require('dotenv').config()
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const passport = require('passport');
@@ -8,6 +9,19 @@ const { Server: IOServer } = require('socket.io')
 const faker = require('faker')
 const normalizeChat = require('./util/normalizeObject')
 const util = require('util')
+const { fork } = require('child_process')
+const path = require('path')
+
+const yargs = require('yargs/yargs')(process.argv.slice(2))
+const { puerto } = yargs
+  .alias({
+    p: 'puerto',
+  })
+  .default({
+    puerto: 8080,
+  }).argv
+
+console.log({ puerto})
 
 /* ------------------ DATABASE -------------------- */
 
@@ -193,6 +207,8 @@ app.get('/test', (req, res) => {
   res.render('main-test',{})
 })
 
+
+
 app.get('/loginsend',(req, res) => {
   req.session.name = req.query.name
   res.redirect('/')
@@ -233,8 +249,40 @@ app.get('/api/productos-test', async (req, res) => {
 res.send(productosArray)
 })
 
+
+
+const args = process.argv
+app.get('/info', (req, res) => {
+  const datainfo = {
+    numeros: args.slice(2),
+    path: process.cwd(),
+    pathcarpeta: process.execPath.split('/').pop(),
+    SO: process.platform,
+    pid: process.pid,
+    version: process.version,
+    memoria: process.memoryUsage()
+  }
+  res.send(datainfo)
+})
+
+app.get('/api/randoms', (req, res) => {
+  let cantidad 
+  if(req.query.cant){
+    cantidad = req.query.cant
+  }else{
+    cantidad = 100000000
+  }
+  const computo = fork(path.resolve(__dirname, 'computo.js'))
+  computo.send(cantidad)
+  computo.on('message', resultado => {
+      res.json({ resultado })
+  })
+
+})
+
+
 /* Server Listen */
-const PORT = 8080
+const PORT = puerto
 const server = httpServer.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${server.address().port}`)
 })
