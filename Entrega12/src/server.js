@@ -270,8 +270,31 @@ app.get('/api/randoms', (req, res) => {
   if(req.query.cant){
     cantidad = req.query.cant
   }else{
-    cantidad = 100000000
+    cantidad = 100000
   }
+/*
+  const calculo = (cant) => {
+    let numeros = []
+    let arraycount = []
+    for (let i = 0; i < cant; i++) {
+        numeros.push(Math.floor((Math.random() * (1000-1)) +1))
+    }
+    numeros.forEach(x => {
+        arraycount.find(e=> {
+            if(e.num == x){
+                e.count++
+            }
+        })
+        arraycount.push({num: x, count:1})
+    })
+    return arraycount
+}
+
+const sum = calculo(cantidad)
+
+res.json({ sum })
+*/
+
   const computo = fork(path.resolve(__dirname, 'computo.js'))
   computo.send(cantidad)
   computo.on('message', resultado => {
