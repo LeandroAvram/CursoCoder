@@ -1,11 +1,13 @@
 module.exports = async (req, res, next) => {
-  const auth = true;
-  if(auth){
+    if (req.isAuthenticated()) {
       next()
-  }else{
-    return res.status(401).send({
+    } else {
+      next()
+      /*
+      return res.status(401).send({
         error: -1,
         descripcion: "ruta no autorizada"
       })
+      */
     }
 }

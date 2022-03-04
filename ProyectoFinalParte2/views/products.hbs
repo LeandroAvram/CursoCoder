@@ -1,0 +1,27 @@
+<div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+        <h1 style="color:black; text-align: center;">Catalogo de productos</h1>
+        <br>
+    {{#if productos }}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {{#each productos}}
+            <div class="col">
+                <div class="card">
+                    <img style="height:200px; width:250px" src={{this.phot}} class="rounded mx-auto d-block" alt="not found">
+                        <div class="card-body">
+                            <h3 class="card-title" style="font-weight: bold;">{{this.name}}</h3>
+                            <p class="card-text">Descripcion: {{this.description}}</p>
+                            <h3 >${{this.price}}</h3>
+                            <p class="card-text">Codigo de Producto: {{this.id}}</p>
+                                <input id="cantElemnt{{@index}}" type="number" style="margin-bottom: 15px;" class="form-control" placeholder="Cantidad de unidades">
+                            <div class="d-grid gap-2">
+                            <button onclick='addCart("{{this.id}}",{{@index}})' type="button" class="btn btn-success">Add to cart</button>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            {{/each}}
+        </div> 
+    {{ else }}
+        <h3 class="alert alert-warning">No se encontraron productos</h1>
+    {{/if}}
+</div>

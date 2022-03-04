@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/estilos.css">
+
+</head>
+
+<body>
+
+  <div class="container my-5">
+    <div class="jumbotron">
+
+      <h1>REGISTER</h1>
+      <br>
+      <form class="form" action="/api/login/register" method="post" role="form" autocomplete="off">
+
+        <div class="form-group">
+          <input id="email" name='username' placeholder="email" class="form-control" type="text" required>
+        </div>
+
+        <div class="form-group">
+          <input id="password" name='password' placeholder="password" class="form-control" type="password" required>
+        </div>
+
+        <div class="form-group">
+          <input id="password2" name='password2' placeholder="validate password" class="form-control" type="password" required>
+        </div>
+
+        <div class="form-group">
+          <input id="name" name='name' placeholder="nombre" class="form-control" type="text" required>
+        </div>
+
+        <div class="form-group">
+          <input id="direccion" name='direccion' placeholder="direccion" class="form-control" type="text" required>
+        </div>
+
+        <div class="form-group">
+          <input id="edad" name='edad' placeholder="edad" class="form-control" type="number" required>
+        </div>
+
+        <div class="form-group">
+          <input id="numline" name='numline' placeholder="numero de telefono" class="form-control" type="number" required>
+        </div>
+
+        <div class="form-group">
+          <input id="foto" name='foto' placeholder="Not url image" class="form-control" type="text" readonly>
+        </div>
+
+        <div class="form-group">
+          <input class="btn btn-success my-3" type="submit" value="Register">
+        </div>
+      </form>
+
+      <hr>
+
+    <form>
+        <div class="form-group">
+            <label for='file'>Select files</label>
+            <input id='file' type="file">
+        </div>
+        <div class="form-group">
+          <input type='button' onclick="return saveImage(this)" class="btn btn-success mt-3 mb-5" value="Cargar imagen">
+        </div>
+    </form>
+
+      <div class="text-left">
+        <button class="btn btn-success my-3" onclick="location.href = '/api/login/login'">Ir a Login</button>
+      </div>
+
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:8080/js/index.js"></script>
+</body>
+
+</html>

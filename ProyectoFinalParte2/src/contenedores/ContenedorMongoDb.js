@@ -96,6 +96,15 @@ class ContenedorMongoDb{
         }
     }
 
+    async getUser(username){
+        try {
+            return await this.DAO.find({username: username}) 
+        } catch (error) {
+            console.log(`Error en operación de base de datos ${error}`)
+            return error
+        }
+    }
+
 }
 
 module.exports = ContenedorMongoDb

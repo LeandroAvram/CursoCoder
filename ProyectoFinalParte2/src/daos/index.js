@@ -10,7 +10,9 @@ const CartsDaoArchivo = require('./carts/CartsDaoArchivo')
 const CartsDaoMongoDb = require('./carts/CartsDaoMongoDb')
 const CartsDaoFirebase = require('./carts/CartsDaoFirebase')
 
-const timpoalamacenamiento = 'firebase'
+const UserDaoMongoDb = require('./login/loginDaoMongoDb')
+
+const timpoalamacenamiento = 'mongodb'
 
 switch (timpoalamacenamiento) {
   case 'mongodb':
@@ -20,6 +22,7 @@ switch (timpoalamacenamiento) {
             }).then(()=>{console.log('Base de datos conectada')})
     faCarts = new CartsDaoMongoDb()
     faProducts = new ProductsDaoMongoDb()
+    faLogin = new UserDaoMongoDb()
     break
   case 'archivo':
     console.log("archivo")
@@ -40,5 +43,6 @@ switch (timpoalamacenamiento) {
 
 module.exports = {
     FaCarts: faCarts,
-    FaProducts: faProducts
+    FaProducts: faProducts,
+    FaLogin: faLogin
 }

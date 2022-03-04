@@ -13,11 +13,12 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.postProduct = async (req, res) => {
-  const { name, description, code, phot, price, stock } = req.body
+  const { name, description, categoria, code, phot, price, stock } = req.body
   
     const json = {
         name: name,
         description: description,
+        categoria: categoria,
         code: code,
         phot: phot,
         stock: stock,
@@ -53,46 +54,12 @@ exports.deleteProduct = async (req, res) => {
 
 /*
 {
-    "nombre": "chocolatada",
-    "descripcion": "producto lacteo necesita de frio",
-    "codigo": "4da68994awe",
-    "foto": "www.asdad.asdadsa",
-    "precio": "689",
+    "name": "Naranja",
+    "description": "Producto de verduleria de buena calidad",
+    "categoria": "verduleria",
+    "code": "76231256",
+    "phot": "xxxxxxxxxxxxxxxx",
+    "price": "530",
     "stock": "6"
 }
-*/
-
-/*
-[
-  {
-    "timestamp": "2021-10-26T23:35:23.081Z",
-    "nombre": "chocolatada",
-    "descripcion": "producto lacteo necesita de frio",
-    "codigo": "4da68994awe",
-    "foto": "www.asdad.asdadsa",
-    "precio": "689",
-    "stock": "6",
-    "id": 1
-  },
-  {
-    "timestamp": "2021-10-26T23:37:51.590Z",
-    "nombre": "leche",
-    "descripcion": "producto lacteo necesita de frio",
-    "codigo": "698qe43asd6ad",
-    "foto": "www.asdad.asdadsa",
-    "precio": "800",
-    "stock": "10",
-    "id": 2
-  },
-  {
-    "timestamp": "2021-10-26T23:39:14.607Z",
-    "nombre": "azucar",
-    "descripcion": "producto que sirve para endulzar",
-    "codigo": "9813d7gh493",
-    "foto": "www.asdad.asdadsa",
-    "precio": "236",
-    "stock": "50",
-    "id": 3
-  }
-]
 */
