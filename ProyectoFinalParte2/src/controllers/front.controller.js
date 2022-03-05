@@ -7,7 +7,7 @@ exports.getProductPage = async (req, res) => {
         return {
         name: x.name,
         price: x.price,
-        phot: x.phot,
+        photo: x.photo,
         id: x.id.valueOf(),
         code: x.code,
         description: x.description

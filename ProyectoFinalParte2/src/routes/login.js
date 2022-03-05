@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('../service/passport')
-const upload  = require('../service/multerFile')
+const upload  = require('../util/multerFile')
 
 
 // REGISTER

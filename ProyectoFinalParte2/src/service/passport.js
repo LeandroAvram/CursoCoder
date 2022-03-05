@@ -1,5 +1,5 @@
 const passport = require('passport');
-const mail = require('./sendmail')
+const mail = require('../util/sendmail')
 const { Strategy: LocalStrategy } = require('passport-local');
 const bCrypt = require('bcrypt');
 const DAO = require('../daos')

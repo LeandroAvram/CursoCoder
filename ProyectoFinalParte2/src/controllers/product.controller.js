@@ -1,65 +1,57 @@
 const DAO = require('../daos')
 const fa = DAO.FaProducts
+const productService = require('../service/product.service')
 
 exports.getProduct = async (req, res) => {
   const id = req.params.id
   if(!req.params.id){
-    let data = await fa.getAll()
-    return res.status(200).send(data)
+    return res.status(200).send(await productService.getProducts())
   }else{
-    let data = await fa.getById(id)
-    return res.status(200).send(data)
+    return res.status(200).send(await productService.getProduct(id))
   }
 }
 
 exports.postProduct = async (req, res) => {
-  const { name, description, categoria, code, phot, price, stock } = req.body
-  
-    const json = {
-        name: name,
-        description: description,
-        categoria: categoria,
-        code: code,
-        phot: phot,
-        stock: stock,
-        price: price,
-        timestamp: new Date
-    }
-    const elem = await fa.save(json)
-    return res.status(200).send(elem)
+
+  const { name, description, code, photo, price, stock } = req.body
+
+  if(!name||!description||!code||!photo||!price||!stock){
+    return res.status(400).send({mensage:"Los parametros del producto enviados son incorrectos"})
+  }
+
+    const jsonProduct = {name,description,code,photo,stock,price}
+
+    return res.status(200).send(await productService.saveProduct(jsonProduct))
 }
 
 exports.putProduct = async (req, res) => {
-  const update = await fa.upDate(req.body,req.params.id)
+  const { id } = req.params
+  const { name, description, code, photo, price, stock } = req.body
+
+  if(!name||!description||!code||!photo||!price||!stock||!id){
+    return res.status(400).send({mensage:"Los parametros del producto enviados son incorrectos"})
+  }
+
+  const jsonProduct = {name,description,code,photo,stock,price}
+
+  const update = await productService.updateProduct(jsonProduct,id)
   
   if(update==false){
-      return res.status(400).send({
+      return res.status(404).send({
             error: 'Producto no encontrado'
         })
   }else{
-    return res.status(200).send(update)
+    return res.status(200).send({mensage:"Producto modificado correctamente"})
   }
-  
 }
 
 exports.deleteProduct = async (req, res) => {
   const { id } = req.params
-  if(!id){
-    return res.status(400).send("mal request")
-  }
-  await fa.deleteById(id)
-  const array = await fa.getAll()
-  return res.status(200).send(array)
-}
 
-/*
-{
-    "name": "Naranja",
-    "description": "Producto de verduleria de buena calidad",
-    "categoria": "verduleria",
-    "code": "76231256",
-    "phot": "xxxxxxxxxxxxxxxx",
-    "price": "530",
-    "stock": "6"
+  if(!id){
+    return res.status(400).send({mensage:"Los parametros del producto enviados son incorrectos"})
+  }
+
+  await productService.deleteProduct(id)
+  return res.status(200).send(await productService.getProducts())
 }
-*/
