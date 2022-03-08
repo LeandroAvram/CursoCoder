@@ -13,7 +13,6 @@ router.use('/api/productos', ProductRoutes)
 router.use('/api/carrito', CartRoutes)
 router.use('/api/login', LoginRoutes)
 router.use('/api/order', OrderRoutes)
-router.use('/front',[authResolverFront],FrontRoutes )
-router.use('/infoServer',frontController.getInfoServer )
+router.use('/',[authResolverFront],FrontRoutes )
 
 module.exports = router

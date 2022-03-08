@@ -1,25 +1,29 @@
-const DAO = require('../daos')
-const fa = DAO.FaProducts
-
+const DAO = require("../daos");
+const fa = DAO.FaProducts;
+const logger = require("../util/logger");
 
 exports.getProduct = (id) => {
-    return fa.getById(id)
-}
+  logger.info("Se obtienen producto con id: " + id);
+  return fa.getById(id);
+};
 
 exports.getProducts = () => {
-    return fa.getAll() 
-}
+  logger.info("Se obtienen todos los productos");
+  return fa.getAll();
+};
 
 exports.saveProduct = (product) => {
-    product.timestamp = new Date()
-    return fa.save(product)
-}
+  logger.info("Se guarda un nuevo producto");
+  product.timestamp = new Date();
+  return fa.save(product);
+};
 
 exports.deleteProduct = (id) => {
-    return fa.deleteById(id)
-}
+  logger.info("Se elimina un producto con id: " + id);
+  return fa.deleteById(id);
+};
 
-exports.updateProduct = (product,id) => {
-    return fa.upDate(product,id)
-}
-
+exports.updateProduct = (product, id) => {
+  logger.info("Se actualiza un producto con id: " + id);
+  return fa.upDate(product, id);
+};

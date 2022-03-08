@@ -1,9 +1,0 @@
-//Post Product 
-{
-    "name": "Eliminar",
-    "description": "Producto de verduleria de buena calidad",
-    "code": "74521374",
-    "photo": "asdasd",
-    "price": "750",
-    "stock": "6"
-}

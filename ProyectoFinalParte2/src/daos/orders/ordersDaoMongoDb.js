@@ -1,12 +1,11 @@
-const ContenedorMongoDb = require('../../contenedores/ContenedorMongoDb')
-const Order = require('../../models/order.model')
+const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
+const Order = require("../../models/order.model");
 
 class OrdersDaoMongoDb extends ContenedorMongoDb {
-    constructor(){
-        super(Order)
-    }
-    async disconnect(){
-    }
+  constructor() {
+    super(Order);
+  }
+  async disconnect() {}
 }
 
-module.exports = OrdersDaoMongoDb
+module.exports = OrdersDaoMongoDb;

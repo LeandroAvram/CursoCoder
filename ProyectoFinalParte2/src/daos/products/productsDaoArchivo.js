@@ -1,14 +1,11 @@
-const ContenedorArchivo = require('../../contenedores/ContenedorArchivo')
+const ContenedorArchivo = require("../../contenedores/ContenedorArchivo");
 
 class ProductsDaoArchivo extends ContenedorArchivo {
+  constructor() {
+    super("src/resource/products.txt");
+  }
 
-    constructor(){
-        super('src/resource/products.txt')
-    }
-
-    async disconnect(){
-
-    }
+  async disconnect() {}
 }
 
-module.exports = ProductsDaoArchivo
+module.exports = ProductsDaoArchivo;

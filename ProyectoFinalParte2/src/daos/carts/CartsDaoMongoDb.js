@@ -1,13 +1,12 @@
-const ContenedorMongoDb = require('../../contenedores/ContenedorMongoDb')
-const Cart = require('../../models/cart.model')
+const ContenedorMongoDb = require("../../contenedores/ContenedorMongoDb");
+const Cart = require("../../models/cart.model");
 
 class CartsDaoMongoDb extends ContenedorMongoDb {
-    constructor(){
-        super(Cart)
-    }
+  constructor() {
+    super(Cart);
+  }
 
-    async disconnect(){
-    }
+  async disconnect() {}
 }
 
-module.exports = CartsDaoMongoDb
+module.exports = CartsDaoMongoDb;
