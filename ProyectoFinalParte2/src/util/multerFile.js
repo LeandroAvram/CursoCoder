@@ -1,9 +1,10 @@
 const multer  = require('multer')
 const { v4: uuidv4 } = require('uuid');
+const DIR_AVATAR = process.env.DIR_AVATAR
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
+      cb(null, DIR_AVATAR)
     },
     filename: function (req, file, cb) {
       const data = file.originalname.split(".")

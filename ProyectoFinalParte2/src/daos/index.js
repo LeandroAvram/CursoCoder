@@ -11,18 +11,24 @@ const CartsDaoMongoDb = require('./carts/CartsDaoMongoDb')
 const CartsDaoFirebase = require('./carts/CartsDaoFirebase')
 
 const UserDaoMongoDb = require('./login/loginDaoMongoDb')
+const OrderDaoMongoDb = require('./orders/ordersDaoMongoDb')
+const ChatDaoMongoDb = require('./chat/chatMongoDb')
 
-const timpoalamacenamiento = 'mongodb'
+const PERCISTENCIA = process.env.PERCISTENCIA 
+const HOSTMONGO = process.env.HOSTMONGO 
 
-switch (timpoalamacenamiento) {
+switch (PERCISTENCIA) {
+  
   case 'mongodb':
     console.log("mongodb")
-     mongoose.connect('mongodb://localhost/test', {
+     mongoose.connect(HOSTMONGO, {
             serverSelectionTimeoutMS: 5000,
             }).then(()=>{console.log('Base de datos conectada')})
     faCarts = new CartsDaoMongoDb()
     faProducts = new ProductsDaoMongoDb()
     faLogin = new UserDaoMongoDb()
+    faOrder = new OrderDaoMongoDb()
+    faChat = new ChatDaoMongoDb()
     break
   case 'archivo':
     console.log("archivo")
@@ -44,5 +50,7 @@ switch (timpoalamacenamiento) {
 module.exports = {
     FaCarts: faCarts,
     FaProducts: faProducts,
-    FaLogin: faLogin
+    FaLogin: faLogin,
+    FaOrder: faOrder,
+    FaChat: faChat
 }

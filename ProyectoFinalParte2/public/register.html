@@ -19,10 +19,10 @@
 
       <h1>REGISTER</h1>
       <br>
-      <form class="form" action="/api/login/register" method="post" role="form" autocomplete="off">
+      <form class="form" action="/api/login/registerFron" method="post" role="form" autocomplete="off">
 
         <div class="form-group">
-          <input id="email" name='username' placeholder="email" class="form-control" type="text" required>
+          <input id="username" name='username' placeholder="email" class="form-control" type="text" required>
         </div>
 
         <div class="form-group">
@@ -66,7 +66,7 @@
             <input id='file' type="file">
         </div>
         <div class="form-group">
-          <input type='button' onclick="return saveImage(this)" class="btn btn-success mt-3 mb-5" value="Cargar imagen">
+          <input type='button' onclick="saveImage(this)" class="btn btn-success mt-3 mb-5" value="Cargar imagen">
         </div>
     </form>
 
@@ -76,7 +76,7 @@
 
     </div>
   </div>
-  <script type="text/javascript" src="http://localhost:8080/js/index.js"></script>
+  <script type="text/javascript" src="/js/index.js"></script>
 </body>
 
 </html>

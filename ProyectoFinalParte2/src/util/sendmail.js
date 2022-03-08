@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const TEST_MAIL = process.env.MAIL || 'laurianne.klocko90@ethereal.email'
+const TEST_MAIL = process.env.MAIL 
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.ethereal.email',
@@ -14,8 +14,8 @@ const transporter = nodemailer.createTransport({
 module.exports = async function (mailOptions) { 
     try {
         const info = await transporter.sendMail(mailOptions)
-        console.log(info)
+        //console.log(info)
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
 };

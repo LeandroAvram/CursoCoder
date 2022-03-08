@@ -1,42 +1,22 @@
 const express = require('express')
 const router = express.Router()
-const passport = require('../service/passport')
+const frontController = require('../controllers/front.controller')
+const userController = require('../controllers/user.controller')
 const upload  = require('../util/multerFile')
 
 
-// REGISTER
-router.get('/register', (req, res) => {res.sendFile(process.cwd() + '/public/register.html')})
-router.post('/register', passport.authenticate('register', { failureRedirect: '/api/login/failregister', successRedirect: '/front/productos' }))
-router.get('/failregister', (req, res) => {res.render('register-error')})
-  
-router.post('/uploadimage', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    console.log("No file received");
-    return res.send({
-      success: false
-    });
 
-  } else {
-    console.log('file received');
-    return res.send({
-      nombre: req.file.filename
-    })
-  }
-});
+// REGISTER
+router.get('/register', frontController.getRegisterPage)
+router.post('/uploadimage', upload.single('file'), userController.updateImageUser);
+router.post('/register', userController.registerUser)
+router.post('/registerFron', userController.registerUserFront)
+
 
 // LOGIN
-router.get('/login', (req, res) => {res.sendFile(process.cwd() + '/public/login.html')})
-router.post('/login', passport.authenticate('login', { failureRedirect: '/api/login/faillogin', successRedirect: '/front/productos' }))
-router.get('/faillogin', (req, res) => {res.render('login-error')})
+router.get('/login', frontController.getLoginPage)
+router.post('/login', userController.loginUser)
+router.post('/loginFront', userController.loginUserFront)
 
-router.get('/logout',(req, res) => {
-  req.session.destroy(err => {
-    if (err) {
-      res.json({ error: 'olvidar', body: err })
-    } else {
-      res.send('usuario deslogeado')
-    }
-  })
-})
 
 module.exports = router

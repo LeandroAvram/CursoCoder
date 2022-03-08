@@ -1,3 +1,41 @@
-<div class="jumbotron">
-     <h1 style="color:blue;">Ingrese carrito</h1>
+<div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+        <h1 style="color:black; text-align: center;">Carrito de productos</h1>
+        <br>
+    {{#if data.productos }}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <table class="table">
+               <thead class="table-dark">
+               <tr>
+                    <th scope="col">ProductID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Total</th>
+                    <th scope="col" style="text-align: center;">Eliminar Cantidad</th>
+               </tr>
+               </thead>
+               <tbody>
+          {{#each data.productos}}
+               <tr>
+                    <td>{{this.productID}}</td>
+                    <td>{{this.nombre}}</td>
+                    <td>${{this.precio}}</td>
+                    <td>{{this.cantidad}}</td>
+                    <td>${{this.total}}</td>
+                    <td style="text-align: center;">
+                         <input id="cantElemnt{{@index}}" type="number" style="margin-right: 5px;" placeholder="Cantidad de unidades">
+                         <button onclick='deleteProductCart("{{this.productID}}",{{@index}})' class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </td>
+               </tr>
+          {{/each}}
+               </tbody>
+               </table>
+          <div>
+          <input id="dire" type="text" style="margin-right: 5px;" placeholder="Direccion de entrega">
+          <button onclick='confirmarCompra()' class="btn btn-success" ><i class="fa fa-trash"></i>  Confirmar Compra</button>
+          </div>
+        </div> 
+    {{ else }}
+        <h3 class="alert alert-warning">No se encontraron productos en el carrito</h1>
+    {{/if}}
 </div>

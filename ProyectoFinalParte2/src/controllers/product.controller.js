@@ -1,5 +1,3 @@
-const DAO = require('../daos')
-const fa = DAO.FaProducts
 const productService = require('../service/product.service')
 
 exports.getProduct = async (req, res) => {
@@ -16,7 +14,7 @@ exports.postProduct = async (req, res) => {
   const { name, description, code, photo, price, stock } = req.body
 
   if(!name||!description||!code||!photo||!price||!stock){
-    return res.status(400).send({mensage:"Los parametros del producto enviados son incorrectos"})
+    return res.status(400).send({error:"Los parametros del producto enviados son incorrectos"})
   }
 
     const jsonProduct = {name,description,code,photo,stock,price}
@@ -29,7 +27,7 @@ exports.putProduct = async (req, res) => {
   const { name, description, code, photo, price, stock } = req.body
 
   if(!name||!description||!code||!photo||!price||!stock||!id){
-    return res.status(400).send({mensage:"Los parametros del producto enviados son incorrectos"})
+    return res.status(400).send({error:"Los parametros del producto enviados son incorrectos"})
   }
 
   const jsonProduct = {name,description,code,photo,stock,price}
@@ -49,7 +47,7 @@ exports.deleteProduct = async (req, res) => {
   const { id } = req.params
 
   if(!id){
-    return res.status(400).send({mensage:"Los parametros del producto enviados son incorrectos"})
+    return res.status(400).send({error:"Los parametros del producto enviados son incorrectos"})
   }
 
   await productService.deleteProduct(id)

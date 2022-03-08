@@ -8,7 +8,8 @@ const userSchema = new Schema({
     direccion: { type: String, required: true },
     edad: { type: Number, required: true },
     numline: { type: Number, required: true },
-    foto: { type: String, required: false }
+    foto: { type: String, required: false },
+    admin: { type: Number, required: true }
   })
   
 

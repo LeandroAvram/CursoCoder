@@ -1,9 +1,9 @@
 <div class="container" style="margin-top: 30px; margin-bottom: 30px;">
         <h1 style="color:black; text-align: center;">Catalogo de productos</h1>
         <br>
-    {{#if productos }}
+    {{#if data.productos }}
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            {{#each productos}}
+            {{#each data.productos}}
             <div class="col">
                 <div class="card">
                     <img style="height:200px; width:250px" src={{this.photo}} class="rounded mx-auto d-block" alt="not found">

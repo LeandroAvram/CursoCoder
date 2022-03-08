@@ -1,0 +1,17 @@
+<div class="container" style="margin-top: 30px; margin-bottom: 30px;">
+        <h1 style="color:black; text-align: center;">Chat con la comunidad</h1>
+        <br>
+        <form onsubmit="return agregarMensaje(this)">
+            <hr>
+            <div id="mensajes" style="height:450px;overflow-y: scroll;"></div>
+            
+            <div class="input-group">
+                <input id="mensaje" type="text" class="form-control" name="mensaje" placeholder="Ingresa un mensaje..."
+                    required />
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-primary" value="Enviar">
+                </span>
+            </div>
+
+        </form>
+</div>

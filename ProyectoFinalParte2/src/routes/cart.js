@@ -2,10 +2,17 @@ const express = require('express')
 const router = express.Router()
 const cartController = require('../controllers/cart.controller')
 
-router.get('/:id/productos',cartController.getCarrito)
+//visto
+router.get('/:username/productos',cartController.getCarrito)
+//visto
 router.post('/',cartController.postNewCarrito)
-router.post('/:id/productos',cartController.postProductCarrito)
+//visto
+router.post('/producto',cartController.postProductCarrito)
+//visto
 router.delete('/:id',cartController.deleteCarrito)
-router.delete('/:id/productos/:id_prod',cartController.deleteProductOfCarrito)
+//visto
+router.delete('/id/producto',cartController.deleteProductOfCarrito)
+//visto
+router.delete('/vaciar/productos', cartController.emptyCart)
 
 module.exports = router
