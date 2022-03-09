@@ -1,11 +1,13 @@
-const ContenedorFirebase = require("../../contenedores/ContenedorFirebase");
+const ContenedorFirebase = require('../../contenedores/ContenedorFirebase')
 
 class ProductsDaoFirebase extends ContenedorFirebase {
-  constructor(db) {
-    super(db.collection("productsCollection"));
-  }
+    constructor(db){
+        super(db.collection('productsCollection'))
+    }
 
-  async disconnect() {}
+    async disconnect(){
+
+    }
 }
 
-module.exports = ProductsDaoFirebase;
+module.exports = ProductsDaoFirebase

@@ -1,83 +1,173 @@
-const cartService = require("../service/cart.service");
-const logger = require("../util/logger");
-
-exports.postNewCarrito = async (req, res) => {
-  const { idUser, username } = req.body;
-
-  if (!idUser || !username) {
-    logger.error("Los parametros del carrito enviados son incorrectos");
-    return res
-      .status(400)
-      .send({ error: "Los parametros del carrito enviados son incorrectos" });
-  }
-
-  return res.status(200).send(await cartService.createCart(idUser, username));
-};
-
-exports.deleteCarrito = async (req, res) => {
-  const idCarrito = req.params.id;
-  return res.status(200).send(await cartService.deleteCart(idCarrito));
-};
+const DAO = require('../daos')
+const fa = DAO.FaCarts
 
 exports.getCarrito = async (req, res) => {
-  const products = await cartService.getProductCartUser(req.params.username);
+    const arrayCarritos = await fa.getAll()
+    const products = arrayCarritos.find( result => result.id == req.params.id )
+    if(products){
+        if(products.productos){
+          return res.status(200).send(products.productos)
+        }else{
+          return res.status(200).send("Carrito sin producto")
+        }
+        
+    }else{
+        return res.status(400).send({
+            error: 'Carrito no encontrado'
+        })
+    }
+}
 
-  if (products.error) {
-    logger.error("Error en obtener carrito de usuario:" + req.params.username);
-    logger.error("Error: " + products.error);
-    return res.status(400).send({ error: products.error });
-  }
-
-  if (!products.length) {
-    logger.info(
-      "No se encuentran productos en el carrito de usuario:" +
-        req.params.username
-    );
-    return res
-      .status(200)
-      .send({ mensaje: "no se encuentran productos en el carrito" });
-  }
-
-  return res.status(200).send({ products });
-};
-
+exports.postNewCarrito = async (req, res) => {
+    const json = {
+        timestamp: new Date,
+        productos: []
+    }
+    const elem = await fa.save(json)
+    return res.status(200).send(elem)
+}
+/**
+ * Example body
+ * [
+        {
+          "timestamp": "2021-10-26T23:35:23.081Z",
+          "nombre": "adadas",
+          "descripcion": "producto lacteo necesita de frio",
+          "codigo": "4da68994awe",
+          "foto": "www.asdad.asdadsa",
+          "precio": "689",
+          "stock": "6",
+          "id": 1
+        },
+        {
+          "timestamp": "2021-10-26T23:35:23.081Z",
+          "nombre": "adadas",
+          "descripcion": "producto lacteo necesita de frio",
+          "codigo": "4da68994awe",
+          "foto": "www.asdad.asdadsa",
+          "precio": "689",
+          "stock": "6",
+          "id": 3
+        }
+      ] 
+ */
 exports.postProductCarrito = async (req, res) => {
-  const { username, idProduct, cant } = req.body;
+    const dato = req.body
+    const productCarts = await fa.postProductCarts(dato,req.params.id)
 
-  if (!username || !idProduct || !cant) {
-    logger.error("Los parametros del carrito enviados son incorrectos");
-    return res
-      .status(400)
-      .send({ error: "Los parametros para añadir son incorrectos" });
-  }
+    if(productCarts==false){
+      return res.status(400).send({error: 'Carrito no encontrado'})
+    }else{
+      return res.status(200).send(productCarts)
+    }
+   
+}
 
-  return res
-    .status(200)
-    .send(await cartService.saveProductInCart(username, idProduct, cant));
-};
+exports.deleteCarrito = async (req, res) => {
+    const array = await fa.deleteById(req.params.id)
+    return res.status(200).send(array)
+}
 
 exports.deleteProductOfCarrito = async (req, res) => {
-  const { username, idProduct, cant } = req.body;
+    const productCarts = await fa.deleteProductCarts(req.params.id, req.params.id_prod)
+    
+    if(productCarts==false){
+      return res.status(400).send({error: 'Carrito y/o producto no encontrado'})
+    }else{
+      return res.status(200).send(productCarts)
+    }
+}
 
-  if (!username || !idProduct || !cant) {
-    logger.error("Los parametros del carrito enviados son incorrectos");
-    return res
-      .status(400)
-      .send({ error: "Los parametros para añadir son incorrectos" });
+
+/*
+[
+  {
+    "timestamp": 1635293014614,
+    "productos": [
+      {
+        "timestamp": "2021-10-26T23:35:23.081Z",
+        "nombre": "chocolatada",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "4da68994awe",
+        "foto": "www.asdad.asdadsa",
+        "precio": "689",
+        "stock": "6",
+        "id": 1
+      },
+      {
+        "timestamp": "2021-10-26T23:37:51.590Z",
+        "nombre": "leche",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "698qe43asd6ad",
+        "foto": "www.asdad.asdadsa",
+        "precio": "800",
+        "stock": "10",
+        "id": 2
+      }
+    ],
+    "id": 1
+  },
+  {
+    "timestamp": 1635293021690,
+    "productos": [],
+    "id": 2
+  },
+  {
+    "timestamp": 1635294797693,
+    "productos": [],
+    "id": 4
   }
+]
+*/
 
-  return res
-    .status(200)
-    .send(await cartService.deteProductInCart(username, idProduct, cant));
-};
 
-exports.emptyCart = async (req, res) => {
-  const { username } = req.body;
-  if (!username) {
-    logger.error("Los parametros del carrito enviados son incorrectos");
-    return res
-      .status(400)
-      .send({ error: "Los parametros para vaciar son incorrectos" });
+/*
+[
+  {
+    "timestamp": 1635293014614,
+    "productos": [
+      {
+        "timestamp": "2021-10-26T23:35:23.081Z",
+        "nombre": "chocolatada",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "4da68994awe",
+        "foto": "www.asdad.asdadsa",
+        "precio": "689",
+        "stock": "6",
+        "id": 1
+      },
+      {
+        "timestamp": "2021-10-26T23:37:51.590Z",
+        "nombre": "leche",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "698qe43asd6ad",
+        "foto": "www.asdad.asdadsa",
+        "precio": "800",
+        "stock": "10",
+        "id": 2
+      },
+      {
+        "timestamp": "2021-10-26T23:37:51.590Z",
+        "nombre": "leche",
+        "descripcion": "producto lacteo necesita de frio",
+        "codigo": "698qe43asd6ad",
+        "foto": "www.asdad.asdadsa",
+        "precio": "800",
+        "stock": "10",
+        "id": 3
+      }
+    ],
+    "id": 1
+  },
+  {
+    "timestamp": 1635293021690,
+    "productos": [],
+    "id": 2
+  },
+  {
+    "timestamp": 1635294797693,
+    "productos": [],
+    "id": 4
   }
-  return res.status(200).send(await cartService.emptyCart(username));
-};
+]
+*/

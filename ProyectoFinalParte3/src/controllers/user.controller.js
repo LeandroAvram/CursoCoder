@@ -2,37 +2,22 @@ const userService = require("../service/user.service");
 const logger = require("../util/logger");
 
 exports.registerUser = async (req, res) => {
-  const {
-    name,
-    direccion,
-    edad,
-    numline,
-    password2,
-    foto,
-    username,
-    password,
-    admin,
-  } = req.body;
-
-  if (
-    !name ||
-    !direccion ||
-    !edad ||
-    !numline ||
-    !password ||
-    !password2 ||
-    !username ||
-    !admin
-  ) {
+  let admin = 0;
+  const {name,direccion,edad,numline,password2,foto,username,password,isadmin} = req.body;
+  if (!name||!direccion||!edad||!numline||!password||!password2||!username) {
     logger.error("Los parametros del usuario enviados son incorrectos");
     return res
       .status(400)
-      .send({ error: "Los parametros del producto enviados son incorrectos" });
+      .send({ error: "Los parametros del usuario enviados son incorrectos" });
   }
 
   if (password != password2) {
     logger.error("Las contraseñas no son iguales");
     return res.status(400).send({ error: "password validation error" });
+  }
+
+  if (isadmin == 1) {
+    admin = 1;
   }
 
   const user = {
@@ -56,7 +41,7 @@ exports.loginUser = async (req, res) => {
     logger.error("Los parametros del usuario enviados son incorrectos");
     return res
       .status(400)
-      .send({ error: "Los parametros del producto enviados son incorrectos" });
+      .send({ error: "Los parametros del usuario enviados son incorrectos" });
   }
 
   const user = { username, password };
@@ -64,6 +49,7 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.registerUserFront = async (req, res) => {
+  let admin = 0;
   const {
     name,
     direccion,
@@ -73,6 +59,7 @@ exports.registerUserFront = async (req, res) => {
     foto,
     username,
     password,
+    isadmin,
   } = req.body;
 
   if (
@@ -92,7 +79,10 @@ exports.registerUserFront = async (req, res) => {
     logger.error("Las contraseñas no son iguales");
     res.render("register-error");
   }
-  const admin = 0;
+  if (isadmin == 1) {
+    admin = 1;
+  }
+
   const user = {
     name,
     direccion,
