@@ -4,8 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "set NODE_ENV=LOCAL&& node ./src/main.js",
-    "start:prod": "set NODE_ENV=PROD&& node ./src/main.js"
+    "start": "NODE_ENV=LOCAL&& node ./src/main.js",
+    "start:prod": "NODE_ENV=PROD&& node ./src/main.js"
   },
   "author": "Leandro Avram",
   "license": "ISC",
